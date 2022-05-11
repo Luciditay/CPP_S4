@@ -23,6 +23,11 @@ public:
 
     int letterInWordToGuess(char lettre);
 
+    bool player_is_alive();
+    void removeOneLife();
+
+    bool player_has_won();
+
     bool letterAlreadyGuesssed(char lettre);
 
     void play_game();

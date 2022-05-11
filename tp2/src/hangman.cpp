@@ -65,23 +65,25 @@ bool Hangman::letterAlreadyGuesssed(char lettre)
     ;
 }
 
-bool Hangman::endGame()
+bool Hangman::player_is_alive()
 {
-    if (m_lives == 0) {
-        std::cout << "You lost ! The word to guess was " << m_wordToGuess << std::endl;
-        return true;
-    }
-    if (m_guessedLetters == m_wordToGuess.length()) {
-        std::cout << "You win ! You succesfully guessed " << m_wordToGuess << std::endl;
-        return true;
-    }
-    return false;
+    return (m_lives > 0);
+}
+
+void Hangman::removeOneLife()
+{
+    m_lives--;
+}
+
+bool Hangman::player_has_won()
+{
+    return (m_guessedLetters == m_wordToGuess.length());
 }
 
 void Hangman::play_game()
 {
     std::cout << "Here is the word still to guess : " << m_wordForUser << std::endl;
-    while (!endGame()) {
+    while (player_is_alive() && !player_has_won()) {
         std::cout << "You have " << m_lives << " lifes" << std::endl;
         std::cout << m_wordForUser << std::endl;
         m_userInput = getLetterFromUser();
@@ -95,10 +97,17 @@ void Hangman::play_game()
             std::cout << "Correct !" << std::endl;
         }
         else {
-            m_lives--;
+            removeOneLife();
             std::cout << "Wrong !" << std::endl;
         }
         m_alreadyGuessedLetters.push_back(m_userInput);
+    }
+
+    if (player_has_won()) {
+        std::cout << "You win ! You succesfully guessed " << m_wordToGuess << std::endl;
+    }
+    else {
+        std::cout << "You lost ! The word to guess was " << m_wordToGuess << std::endl;
     }
 }
 
