@@ -4,6 +4,5 @@
 
 int main()
 {
-    std::cout << "hello world" << std::endl;
     play_the_game();
 }
