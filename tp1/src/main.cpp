@@ -1,7 +1,9 @@
 #include <iostream>
+#include <random>
+#include "guessNumber.hpp"
 
 int main()
 {
-    std::cout << "Hello World\n";
-    std::cout << "hrllo" << endl;
+    std::cout << "hello world" << std::endl;
+    play_the_game();
 }
