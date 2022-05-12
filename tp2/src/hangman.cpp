@@ -19,8 +19,8 @@ char getLetterFromUser()
     return lettre;
 }
 
-Hangman::Hangman(int lives, const std::vector<std::string>& possibleWords)
-    : m_lives(lives), m_wordToGuess(pick_random_words(possibleWords))
+Hangman::Hangman(int lives)
+    : m_lives(lives), m_wordToGuess(pick_random_words())
 {
     m_wordForUser = wordToUnderscore(m_wordToGuess);
 }
@@ -32,11 +32,13 @@ int rand(int min, int max)
     return distribution(generator);
 }
 
-std::string pick_random_words(const std::vector<std::string>& possibleWords)
+std::string pick_random_words()
 {
-    if (!possibleWords.empty()) {
-        unsigned int wordId = rand(0, possibleWords.size() - 1);
-        return possibleWords.at(wordId);
+    std::vector<std::string> allWords = {"cattle", "coding", "cinema", "melenchon", "nupes"};
+
+    if (!allWords.empty()) {
+        unsigned int wordId = rand(0, allWords.size() - 1);
+        return allWords.at(wordId);
     }
     std::cout << "L'ensemble des mots possible est vide ! Arrêt du programme." << std::endl;
     exit(EXIT_FAILURE);
@@ -111,9 +113,9 @@ void Hangman::play_game()
     }
 }
 
-void launch_game(const std::vector<std::string>& possibleWords)
+void launch_game()
 {
-    Hangman hangman(LIVES, possibleWords);
+    Hangman hangman(LIVES);
     std::cout << "Welcome to Hangman !" << std::endl;
     hangman.play_game();
 }

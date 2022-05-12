@@ -3,7 +3,7 @@
 
 std::string wordToUnderscore(std::string& word);
 
-std::string pick_random_words(const std::vector<std::string>& possibleWords);
+std::string pick_random_words();
 
 char getLetterFromUser();
 
@@ -19,7 +19,7 @@ private:
     std::vector<char> m_alreadyGuessedLetters;
 
 public:
-    Hangman(int lives, const std::vector<std::string>& possibleWords);
+    explicit Hangman(int lives);
 
     int letterInWordToGuess(char lettre);
 
@@ -35,4 +35,4 @@ public:
     bool endGame();
 };
 
-void launch_game(const std::vector<std::string>& possibleWords);
+void launch_game();
