@@ -53,7 +53,7 @@ void draw_noughts_and_crosses(const Board& board, p6::Context& ctx, int nb_rows,
 {
     for (int i = 0; i < board.getBoardSize(); i++) {
         if (board[i].get_cell_player() == Player::Noughts) {
-            draw_square(ctx, board.getCell(i).x, board.getCell(i).y, 2.f * ctx.aspect_ratio() / nb_columns, 2.f / nb_rows);
+            draw_nought(ctx, board.getCell(i).x, board.getCell(i).y, 2.f * ctx.aspect_ratio() / nb_columns, 2.f / nb_rows);
         }
         if (board[i].get_cell_player() == Player::Crosses) {
             draw_cross(ctx, board.getCell(i).x, board.getCell(i).y, 2.f * ctx.aspect_ratio() / nb_columns, 2.f / nb_rows);

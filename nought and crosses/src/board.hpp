@@ -29,4 +29,4 @@ void draw_board(p6::Context& ctx, float nb_rows, float nb_columns);
 
 void draw_cross(p6::Context& ctx, float x, float y, float xRadius, float yRadius);
 
-void draw_square(p6::Context& ctx, int x, int y, float xRadius, float yRadius);
+void draw_nought(p6::Context& ctx, int x, int y, float xRadius, float yRadius);

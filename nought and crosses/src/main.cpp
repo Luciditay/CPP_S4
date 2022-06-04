@@ -34,13 +34,16 @@ void highligh_hovered_cell(p6::Context& ctx, Board& board, Player current_player
 {
     if (auto clickedCell = mouse_position_to_index(ctx, nb_rows, nb_columns)) {
         int index = cell_index_to_board_index(*clickedCell, nb_rows);
-        std::cout << index << std::endl;
 
         if (is_cell_empty(board, index)) {
-            put_current_player_on_cell(board, current_player, index);
-        }
-        else {
-            std::cout << "Not empty cell" << std::endl;
+            float xRadius = 2.f * ctx.aspect_ratio() / nb_columns;
+            float yRadius = 2.f / nb_rows;
+            if (current_player == Player::Crosses) {
+                draw_cross(ctx, clickedCell->y, clickedCell->x, xRadius, yRadius);
+            }
+            if (current_player == Player::Noughts) {
+                draw_nought(ctx, clickedCell->y, clickedCell->x, xRadius, yRadius);
+            }
         }
     }
 }
@@ -59,6 +62,7 @@ int main()
                                                  // ctx.stroke = {0.8f, 1., 1., 1.};
         draw_board(ctx, 3.f, 3.f);
         draw_noughts_and_crosses(board, ctx, 3, 3);
+        highligh_hovered_cell(ctx, board, Player::Noughts, 3, 3);
         //  ctx.mouse_pressed();
 
     };

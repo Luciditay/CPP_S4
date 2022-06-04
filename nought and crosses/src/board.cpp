@@ -55,7 +55,11 @@ void draw_cross(p6::Context& ctx, float x, float y, float xRadius, float yRadius
     ctx.line(glm::vec2(x1, y1 - yRadius), glm::vec2(x1 + xRadius, y1));
 }
 
-void draw_square(p6::Context& ctx, int x, int y, float xRadius, float yRadius)
+void draw_nought(p6::Context& ctx, int x, int y, float xRadius, float yRadius)
 {
-    ctx.rectangle(p6::TopLeftCorner{x, y}, p6::Radii{xRadius, yRadius});
+    glm::vec2 crossPos = cell_index_to_top_left_position(ctx, 3, 3, glm::vec2(x, y));
+
+    float x1 = crossPos.x;
+    float y1 = crossPos.y;
+    ctx.ellipse(p6::Center{x1 + xRadius / 2, y1 - yRadius / 2}, p6::Radii{xRadius / 2, yRadius / 2});
 }
