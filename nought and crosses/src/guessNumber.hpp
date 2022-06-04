@@ -3,7 +3,7 @@
 
 static constexpr int MaxRange = 200;
 
-void play_the_game();
+void play_guess_number();
 
 int rand(int min, int max);
 int pick_random_number();

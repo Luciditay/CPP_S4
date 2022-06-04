@@ -1,11 +1,5 @@
 #include "guessNumber.hpp"
-
-int rand(int min, int max)
-{
-    static std::default_random_engine  generator{std::random_device{}()};
-    std::uniform_int_distribution<int> distribution{min, max};
-    return distribution(generator);
-}
+#include "hangman.hpp"
 
 int pick_random_number()
 {
@@ -35,7 +29,7 @@ bool InputEqualNumber(int input, int number)
     return (input == number);
 }
 
-void play_the_game()
+void play_guess_number()
 {
     std::cout << "Let's play Guess-The-Number the game !" << std::endl;
     std::cout << "The number to guess in between 0 and " << MaxRange << std::endl;
