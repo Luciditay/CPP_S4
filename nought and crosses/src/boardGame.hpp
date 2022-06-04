@@ -1,3 +1,4 @@
+#pragma once
 #include <cstdlib>
 #include <vector>
 #include "boardCell.hpp"

@@ -21,11 +21,11 @@ struct cellIndex {
     }
 };
 
-glm::vec2 cell_index_to_top_left_position(p6::Context& ctx, float nb_rows, float nb_columns, cellIndex index);
+glm::vec2 cell_index_to_top_left_position(p6::Context& ctx, int nb_rows, int nb_columns, cellIndex index);
 
-std::optional<cellIndex> mouse_position_to_index(p6::Context& ctx, float nb_rows, float nb_columns);
+std::optional<cellIndex> mouse_position_to_index(p6::Context& ctx, int nb_rows, int nb_columns);
 
-void draw_board(p6::Context& ctx, float nb_rows, float nb_columns);
+void draw_board(p6::Context& ctx, int nb_rows, int nb_columns);
 
 void draw_cross(p6::Context& ctx, float x, float y, float xRadius, float yRadius);
 
