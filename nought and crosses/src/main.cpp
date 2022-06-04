@@ -35,7 +35,7 @@ void highligh_hovered_cell(p6::Context& ctx, Board& board, Player current_player
     if (auto clickedCell = mouse_position_to_index(ctx, nb_rows, nb_columns)) {
         int index = cell_index_to_board_index(*clickedCell, nb_rows);
 
-        if (is_cell_empty(board, index)) {
+        if (index <= 8 && is_cell_empty(board, index)) {
             float xRadius = 2.f * ctx.aspect_ratio() / nb_columns;
             float yRadius = 2.f / nb_rows;
             if (current_player == Player::Crosses) {
