@@ -4,7 +4,8 @@
 
 class Board {
 public:
-    Board(int rows, int columns)
+    Board(int rows, int columns, int pawn = 0)
+        : _pawn_played(pawn)
     {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < columns; j++) {
@@ -13,9 +14,16 @@ public:
         }
     }
 
-    const BoardCell operator[](std::size_t index) const
+    BoardCell operator[](std::size_t index) const
     {
         return board.at(index);
+    }
+
+    int pawn_played() { return _pawn_played; }
+
+    bool is_full()
+    {
+        return _pawn_played == 9;
     }
 
     void assign_player_to_cell(cellIndex cell, Player p, int nb_rows)
@@ -27,6 +35,8 @@ public:
     {
         board.at(index).set_cell_player(p);
     }
+
+    void player_played() { _pawn_played++; }
 
     const cellIndex getCell(size_t index) const
     {
@@ -42,21 +52,23 @@ public:
 
 private:
     std::vector<BoardCell> board;
+    int                    _pawn_played;
 };
 
-int cell_index_to_board_index(cellIndex index, float nb_rows)
-{
-    return static_cast<int>(index.y * (nb_rows) + index.x);
-}
+void display_winning_message(Board& board, Player winning_player);
+void display_board(p6::Context& ctx, Board& board, int nb_row, int nb_column, Player current_player);
 
-void draw_noughts_and_crosses(const Board& board, p6::Context& ctx, int nb_rows, int nb_columns)
-{
-    for (int i = 0; i < board.getBoardSize(); i++) {
-        if (board[i].get_cell_player() == Player::Noughts) {
-            draw_nought(ctx, board.getCell(i).x, board.getCell(i).y, 2.f * ctx.aspect_ratio() / nb_columns, 2.f / nb_rows);
-        }
-        if (board[i].get_cell_player() == Player::Crosses) {
-            draw_cross(ctx, board.getCell(i).x, board.getCell(i).y, 2.f * ctx.aspect_ratio() / nb_columns, 2.f / nb_rows);
-        }
-    }
-}
+bool is_cell_empty(Board& board, int index);
+int  cell_index_to_board_index(cellIndex index, float nb_rows);
+
+void draw_noughts_and_crosses(const Board& board, p6::Context& ctx, int nb_rows, int nb_columns);
+void put_current_player_on_cell(Board& board, Player current_player, int index);
+
+bool check_win_after_pawn(Board& board, Player current_player, int pawn_index);
+bool check_win_by_diagonal(Board& board, Player current_player, int pawn_index);
+bool check_win_by_line(Board& board, Player current_player, int pawn_index);
+bool check_win_by_row(Board& board, Player current_player, int pawn_index);
+
+bool   current_player_play_on_board(p6::Context& ctx, Board& board, Player current_player, float nb_rows, float nb_columns);
+void   highligh_hovered_cell(p6::Context& ctx, Board& board, Player current_player, float nb_rows, float nb_columns);
+Player swap_player(Player current_player);
