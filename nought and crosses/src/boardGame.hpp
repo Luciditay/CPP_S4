@@ -39,14 +39,12 @@ public:
 
     void player_played() { _pawn_played++; }
 
-    const cellIndex getCell(size_t index) const
+    cellIndex getCell(size_t index) const
     {
         return board.at(index).get_cell_index();
     }
 
-    void update();
-
-    const size_t getBoardSize() const
+    size_t getBoardSize() const
     {
         return board.size();
     }
@@ -65,11 +63,14 @@ int  cell_index_to_board_index(cellIndex index, float nb_rows);
 void draw_noughts_and_crosses(const Board& board, p6::Context& ctx, int nb_rows, int nb_columns);
 void put_current_player_on_cell(Board& board, Player current_player, int index);
 
+//Regarde après qu'un joueur ait placé un pion en Board[pawn_index], si ce joueur remporte la partie/s'il y a égalité
 bool check_win_after_pawn(Board& board, Player current_player, int pawn_index);
 bool check_win_by_diagonal(Board& board, Player current_player, int pawn_index);
 bool check_win_by_line(Board& board, Player current_player, int pawn_index);
 bool check_win_by_row(Board& board, Player current_player, int pawn_index);
 
-bool   current_player_play_on_board(p6::Context& ctx, Board& board, Player current_player, float nb_rows, float nb_columns);
+bool current_player_play_on_board(p6::Context& ctx, Board& board, Player current_player, float nb_rows, float nb_columns);
+
+//Lors du passage de la souris sur une case, highlight la case avec le pion du joueur courant
 void   highligh_hovered_cell(p6::Context& ctx, Board& board, Player current_player, float nb_rows, float nb_columns);
 Player swap_player(Player current_player);
